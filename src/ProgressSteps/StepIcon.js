@@ -14,7 +14,7 @@ class StepIcon extends Component {
           borderRadius: 20,
           backgroundColor: this.props.activeStepIconColor,
           borderColor: this.props.activeStepIconBorderColor,
-          borderWidth: 5,
+          borderWidth: this.props.circleBorderWidth,
           bottom: 2,
         },
         circleText: {
@@ -149,20 +149,20 @@ class StepIcon extends Component {
     }
 
     return (
-      <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-        <View style={styles.circleStyle}>
-          <Text style={styles.circleText}>
-            {this.props.isCompletedStep ? (
-              <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
-            ) : (
-              <Text style={styles.stepNum}>{this.props.stepNum}</Text>
-            )}
-          </Text>
+        <View style={{ flexDirection: 'column', alignItems: 'center' }}>
+          <View style={styles.circleStyle}>
+            <Text style={styles.circleText}>
+              {this.props.isCompletedStep ? (
+                  <Text style={{ color: this.props.completedCheckColor }}>&#10003;</Text>
+              ) : (
+                  <Text style={styles.stepNum}>{this.props.stepNum}</Text>
+              )}
+            </Text>
+          </View>
+          <Text style={styles.labelText}>{this.props.label}</Text>
+          {!this.props.isFirstStep && <View style={styles.leftBar} />}
+          {!this.props.isLastStep && <View style={styles.rightBar} />}
         </View>
-        <Text style={styles.labelText}>{this.props.label}</Text>
-        {!this.props.isFirstStep && <View style={styles.leftBar} />}
-        {!this.props.isLastStep && <View style={styles.rightBar} />}
-      </View>
     );
   }
 }
@@ -196,6 +196,8 @@ StepIcon.propTypes = {
   disabledStepNumColor: PropTypes.string,
 
   completedCheckColor: PropTypes.string,
+  circleBorderWidth: PropTypes.number,
+
 };
 
 StepIcon.defaultProps = {
@@ -220,6 +222,8 @@ StepIcon.defaultProps = {
   disabledStepNumColor: 'white',
 
   completedCheckColor: 'white',
+
+  circleBorderWidth: 5
 };
 
 export default StepIcon;
